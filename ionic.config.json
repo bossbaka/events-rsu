@@ -1,0 +1,8 @@
+{
+  "name": "events",
+  "app_id": "09cf5c74",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
