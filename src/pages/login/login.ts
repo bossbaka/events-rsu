@@ -1,25 +1,54 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { IonicPage, NavController } from "ionic-angular";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AuthProvider } from "../../providers/auth/auth";
+
+// Import the TabsPage component
+import { TabsPage } from "../tabs/tabs";
 
 @IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
+  selector: "page-login",
+  templateUrl: "login.html"
 })
 export class LoginPage {
+  /**
+   * Create reference for FormGroup object
+   */
+  public form: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    private _FB: FormBuilder,
+    private _AUTH: AuthProvider
+  ) {
+    // Define FormGroup object using Angular's FormBuilder
+    this.form = this._FB.group({
+      email: ["", Validators.required],
+      password: ["", Validators.required]
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+  /**
+   * Log in using the loginWithEmailAndPassword method
+   * from the AuthProvider service (supplying the email
+   * and password FormControls from the template via the
+   * FormBuilder object
+   * @method logIn
+   * @return {none}
+   */
+  logIn(): void {
+    let email: any = this.form.controls["email"].value,
+      password: any = this.form.controls["password"].value;
 
+    this._AUTH
+      .loginWithEmailAndPassword(email, password)
+      .then((auth: any) => {
+        this.navCtrl.setRoot(TabsPage);
+      })
+      .catch((error: any) => {
+        console.log(error.message);
+      });
+  }
 }
