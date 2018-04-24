@@ -1,54 +1,37 @@
-import { Component } from "@angular/core";
-import { IonicPage, NavController } from "ionic-angular";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-
-import { AuthProvider } from "../../providers/auth/auth";
-
-// Import the TabsPage component
-import { TabsPage } from "../tabs/tabs";
+import { Component } from '@angular/core';
+import { IonicPage, NavController, LoadingController } from 'ionic-angular';
+import { HomePage } from '../../pages/home/home'
+import { AuthProvider } from '../../providers/auth/auth'
 
 @IonicPage()
 @Component({
-  selector: "page-login",
-  templateUrl: "login.html"
+    selector: 'page-login',
+    templateUrl: 'login.html',
 })
 export class LoginPage {
-  /**
-   * Create reference for FormGroup object
-   */
-  public form: FormGroup;
+    credentials: any = {
+        email: '',
+        password: ''
+    }
 
-  constructor(
-    public navCtrl: NavController,
-    private _FB: FormBuilder,
-    private _AUTH: AuthProvider
-  ) {
-    // Define FormGroup object using Angular's FormBuilder
-    this.form = this._FB.group({
-      email: ["", Validators.required],
-      password: ["", Validators.required]
-    });
-  }
+    constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
+        public authProvider: AuthProvider) {}
 
-  /**
-   * Log in using the loginWithEmailAndPassword method
-   * from the AuthProvider service (supplying the email
-   * and password FormControls from the template via the
-   * FormBuilder object
-   * @method logIn
-   * @return {none}
-   */
-  logIn(): void {
-    let email: any = this.form.controls["email"].value,
-      password: any = this.form.controls["password"].value;
+    ionViewDidLoad() {
+        if (localStorage.getItem("isLogin") == "true") {
+            this.navCtrl.setRoot(HomePage);
+        }
+    }
 
-    this._AUTH
-      .loginWithEmailAndPassword(email, password)
-      .then((auth: any) => {
-        this.navCtrl.setRoot(TabsPage);
-      })
-      .catch((error: any) => {
-        console.log(error.message);
-      });
-  }
+    login() {
+        this.authProvider.login(this.credentials).then((res: any) => {
+            this.navCtrl.setRoot(HomePage);
+        }).catch((err) => {
+            alert(err.message);
+        });
+    }
+
+    register() {
+        this.navCtrl.push("RegisterPage")
+    }
 }

@@ -1,68 +1,29 @@
-import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import "rxjs/add/operator/map";
-import { Observable } from "rxjs/Observable";
-
-// DON'T forget to import the Firebase node package!
-import * as firebase from "firebase";
-
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+ 
 @Injectable()
 export class AuthProvider {
-  public user: Observable;
-  Observable: any;
 
-  constructor(public http: Http) {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        // User is signed in.
-        console.log("User is signed in");
-      } else {
-        // No user is signed in.
-        console.log("User is NOT signed in");
-      }
-    });
-  }
+    constructor(public angFireAuth: AngularFireAuth) {
 
-  /**
-   * Use Firebase Web API signInWithEmailAndPassword method
-   * to authenticate user login attempt
-   *
-   * @method loginWithEmailAndPassword
-   * @param email    {string}      User e-mail address (gmail)
-   * @param password {string}      Gmail address password
-   * @return {Promise}
-   */
-  loginWithEmailAndPassword(email: string, password: string): Promise {
-    return new Promise((resolve, reject) => {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then((val: any) => {
-          resolve(val);
+    }
+
+    login(credentials) {
+        var promise = new Promise((resolve, reject) => {
+            this.angFireAuth.auth.signInWithEmailAndPassword(
+                    credentials.email, credentials.password)
+                .then(() => {
+                    localStorage.setItem("isLogin", "true");
+                    resolve(true);
+                }).catch((err) => {
+                    reject(err);
+                })
         })
-        .catch((error: any) => {
-          reject(error);
-        });
-    });
-  }
+        return promise;
+    }
 
-  /**
-   * Log out with Firebase Web API signOut method
-   *
-   * @method logOut
-   * @return {Promise}
-   */
-  logOut(): Promise {
-    return new Promise((resolve, reject) => {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          resolve(true);
-        })
-        .catch((error: any) => {
-          reject(error);
-        });
-    });
-  }
+    logout() {
+        localStorage.removeItem("isLogin")
+    }
+
 }

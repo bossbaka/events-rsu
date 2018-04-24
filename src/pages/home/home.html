@@ -1,17 +1,37 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-list *ngIf="items">
+    <ion-item *ngFor="let item of items | async">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <ion-thumbnail>
+              <img [src]="item.photo">
+            </ion-thumbnail>
+          </ion-col>
+          <ion-col col-8>
+            ID: {{item.id}}
+            <br>Name: {{item.name}}
+            <br>Cost: {{item.cost}}
+            <br>Type:
+            <span *ngIf="types">{{item.type}}</span>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+
+
+  <button ion-button secondary (click)="logout()" >LOG OUT</button>
 </ion-content>
+
+

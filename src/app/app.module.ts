@@ -1,66 +1,67 @@
-import { LoginPage } from './../pages/login/login';
-import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { UserProvider } from '../providers/user/user';
+
+// Import library firbease
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireDatabase } from 'angularfire2/database';
+
+// import file configurasi yang kita biuat tadi
+import { config } from './app.firebaseconfig';
 import { AuthProvider } from '../providers/auth/auth';
 
-//import firebase from 'firebase';
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyANoo4ZrYC6sLzlh-boG58rSoO85j6PKLs",
-  authDomain: "event-rsu-app.firebaseapp.com",
-  databaseURL: "https://event-rsu-app.firebaseio.com",
-  projectId: "event-rsu-app",
-  storageBucket: "event-rsu-app.appspot.com",
-  messagingSenderId: "828624527899"
-};
+
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 
 @NgModule({
-  declarations: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage,
-    LoginPage
-  ],
-  imports: [
-    BrowserModule,
-    HttpModule,
-    IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule.enablePersistence(),
-    AngularFireStorageModule
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage,
-    LoginPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider,
-  ]
+    declarations: [
+        MyApp,
+        HomePage,
+        ListPage
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(MyApp),
+
+        // tambahkan module di sini
+        AngularFireModule.initializeApp(config),
+        AngularFirestoreModule.enablePersistence(),
+        AngularFireStorageModule
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        HomePage,
+        ListPage,
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        {
+            provide: ErrorHandler,
+            useClass: IonicErrorHandler
+        },
+        UserProvider,
+        //tambahkan auth provider & AngularFireDatabase di sini
+        AngularFireAuth,
+        AngularFireDatabase,
+    AuthProvider
+    ]
 })
 export class AppModule {}
+
+
