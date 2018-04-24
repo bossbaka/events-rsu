@@ -9,6 +9,7 @@ import * as firebase from "firebase";
 @Injectable()
 export class AuthProvider {
   public user: Observable;
+  Observable: any;
 
   constructor(public http: Http) {
     firebase.auth().onAuthStateChanged(user => {
