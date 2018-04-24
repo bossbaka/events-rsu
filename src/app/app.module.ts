@@ -11,6 +11,22 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AuthProvider } from '../providers/auth/auth';
+
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyANoo4ZrYC6sLzlh-boG58rSoO85j6PKLs",
+  authDomain: "event-rsu-app.firebaseapp.com",
+  databaseURL: "https://event-rsu-app.firebaseio.com",
+  projectId: "event-rsu-app",
+  storageBucket: "event-rsu-app.appspot.com",
+  messagingSenderId: "828624527899"
+};
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -21,7 +37,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule.enablePersistence(),
+    AngularFireStorageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,7 +53,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider
   ]
 })
 export class AppModule {}
