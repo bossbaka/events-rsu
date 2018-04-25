@@ -7,31 +7,27 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list *ngIf="items">
-    <ion-item *ngFor="let item of items | async">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-4>
-            <ion-thumbnail>
-              <img [src]="item.photo">
-            </ion-thumbnail>
-          </ion-col>
-          <ion-col col-8>
-            ID: {{item.id}}
-            <br>Name: {{item.name}}
-            <br>Cost: {{item.cost}}
-            <br>Type:
-            <span *ngIf="types">{{item.type}}</span>
-
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-  </ion-list>
 
 
-  <button ion-button secondary (click)="logout()" >LOG OUT</button>
-</ion-content>
 
 
+  <ion-content padding>
+    <ion-list *ngIf="items">
+      <ion-item *ngFor="let item of items | async">
+        <ion-card>
+            <img [src]="item.photo" width="180" height="200">
+          <ion-card-content>
+            <ion-item>
+            <p>
+              <br>{{item.name}}
+              <br>{{item.date}}
+            </p>
+          </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ion-list>
+
+
+    <button ion-button secondary (click)="logout()">LOG OUT</button>
+  </ion-content>

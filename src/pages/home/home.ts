@@ -26,7 +26,7 @@ export class HomePage {
   }
 
   getDataFireStore() {
-    this.itemsCollection = this.afs.collection("beverage");
+    this.itemsCollection = this.afs.collection("event");
     this.items = this.itemsCollection.valueChanges();
   }
 
