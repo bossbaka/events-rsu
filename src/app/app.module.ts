@@ -23,13 +23,13 @@ import { AuthProvider } from '../providers/auth/auth';
 
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { AngularFireStorageModule } from 'angularfire2/storage';
-
 
 
 @NgModule({
@@ -68,7 +68,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
         AngularFireAuth,
         AngularFireDatabase,
         AuthProvider,
-        BarcodeScanner
+        BarcodeScanner,
+        SocialSharing
     ]
 })
 export class AppModule {}

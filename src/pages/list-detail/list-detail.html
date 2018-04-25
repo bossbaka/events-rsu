@@ -14,17 +14,19 @@
 
 
 
-    <ion-content padding>
-        <ion-card *ngIf="detail">
-          <img [src]="detail.photo" />
-          <ion-card-content>
-            <ion-card-title>
-              {{detail.name}}
-            </ion-card-title>
-            <p>
+<ion-content padding>
+  <ion-card *ngIf="detail">
+    <img [src]="detail.photo" />
+    <ion-card-content>
+      <ion-card-title>
+        {{detail.name}}
+      </ion-card-title>
+      <p>
 
-            </p>
-          </ion-card-content>
-        </ion-card>
-      </ion-content>
-
+      </p>
+      <ion-item>
+        <button ion-button item-left (click)="share(detail)">Share</button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
