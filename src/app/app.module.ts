@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { ScanPage } from '../pages/scan/scan';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,6 +20,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { config } from './app.firebaseconfig';
 import { AuthProvider } from '../providers/auth/auth';
 
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -27,15 +30,17 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 
 
+
 @NgModule({
     declarations: [
         MyApp,
         HomePage,
-        ListPage
+        ScanPage
     ],
     imports: [
         BrowserModule,
         IonicModule.forRoot(MyApp),
+        NgxQRCodeModule,
 
         // tambahkan module di sini
         AngularFireModule.initializeApp(config),
@@ -46,7 +51,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     entryComponents: [
         MyApp,
         HomePage,
-        ListPage,
+        ScanPage,
     ],
     providers: [
         StatusBar,
@@ -59,7 +64,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
         //tambahkan auth provider & AngularFireDatabase di sini
         AngularFireAuth,
         AngularFireDatabase,
-    AuthProvider
+        AuthProvider,
+        BarcodeScanner
     ]
 })
 export class AppModule {}
