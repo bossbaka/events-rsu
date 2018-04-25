@@ -22,7 +22,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'หน้าแรก', component: HomePage },
-      { title: 'สแกนบาร์โค้ด', component: ScanPage }
+      { title: 'สแกน QRCode', component: ScanPage }
     ];
 
   }

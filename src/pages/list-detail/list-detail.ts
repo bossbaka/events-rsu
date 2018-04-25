@@ -3,9 +3,11 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ActionSheetController
+  ActionSheetController,
+  //AlertController
 } from "ionic-angular";
 import { SocialSharing } from "@ionic-native/social-sharing";
+
 
 /**
  * Generated class for the ListDetailPage page.
@@ -21,12 +23,15 @@ import { SocialSharing } from "@ionic-native/social-sharing";
 })
 export class ListDetailPage {
   detail: any;
+  qrData = null;
+  createdCode = null;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private actionSheetController: ActionSheetController,
-    private socialSharing: SocialSharing
+    private socialSharing: SocialSharing,
+    //public alertCtrl: AlertController,
   ) {
     this.detail = navParams.get("selectedItem");
     console.log(this.detail);
@@ -51,4 +56,40 @@ export class ListDetailPage {
     });
     shareActionSheet.present();
   }
+
+
+  // createCode(qrData){
+  //   let alert = this.alertCtrl.create({
+  //     title: 'กรอกข้อมูล',
+  //     inputs: [
+  //       {
+  //         name: 'qrData',
+  //         placeholder: 'รหัสนักศึกษา',
+  //       }
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'ยกเลิก',
+  //         role: 'cancel',
+  //         handler: () => {
+  //           console.log('Canceled');
+  //         }
+  //       },
+  //       {
+  //         text: 'ยืนยัน',
+  //         handler: () => {
+  //           this.createdCode = this.qrData;
+  //           console.log('Logined!');
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   alert.present();
+  // }
+
+  createCode() {
+    this.createdCode = this.qrData;
+  }
+
+
 }

@@ -15,30 +15,35 @@
 
 
 <ion-content padding *ngIf="detail">
-
-
   <img [src]="detail.photo">
-
-
 
   <h1>{{detail.name}} </h1>
   <h5>
     วัน : {{detail.date}}
     <br> เวลา : {{detail.time}}
     <br> สถานที่ : {{detail.place}}
-
   </h5>
 
-
-
-
-
-
-
-
   <p>
-    <button ion-button item-left (click)="share(detail)">Share</button>
+    <ion-item>
+      <button ion-button item-right style="min-width: 80px; padding: 18px 18px" (click)="share(detail)">Share</button>
+    </ion-item>
   </p>
+  <p>
+    <ion-item>
+      <ion-input type="text" placeholder="กรอกรหัสนักศึกษา" [(ngModel)]="qrData">
+      </ion-input>
+    </ion-item>
+  </p>
+  <button ion-button full color="danger" (click)="createCode()">สนใจเข้าร่วมงาน</button>
+
+  <ion-card *ngIf="createdCode">
+    <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+    <ion-card-content>
+        สแกน QRCode
+      <p>ข้อมูลรหัสนักศึกษา : {{ createdCode }}</p>
+    </ion-card-content>
+  </ion-card>
 
 
 </ion-content>
