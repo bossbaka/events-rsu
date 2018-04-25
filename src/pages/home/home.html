@@ -8,26 +8,25 @@
 </ion-header>
 
 
-
-
-
-  <ion-content padding>
-    <ion-list *ngIf="items">
-      <ion-item *ngFor="let item of items | async">
-        <ion-card>
-            <img [src]="item.photo" width="180" height="200">
-          <ion-card-content>
-            <ion-item>
+<ion-content padding>
+  <ion-list *ngIf="items">
+    <ion-item *ngFor="let item of items | async" (click)="select(item)">
+      <ion-card>
+        <img [src]="item.photo" width="180" height="200">
+        <ion-card-content style="padding: 5px 5px 5px 5px;">
+          <ion-item>
             <p>
-              <br>{{item.name}}
+              {{item.name}}
               <br>{{item.date}}
             </p>
           </ion-item>
-          </ion-card-content>
-        </ion-card>
-      </ion-item>
-    </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
 
 
-    <button ion-button secondary (click)="logout()">LOG OUT</button>
-  </ion-content>
+  <button ion-button secondary (click)="logout()">LOG OUT</button>
+
+
+</ion-content>

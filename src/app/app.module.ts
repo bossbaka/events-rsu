@@ -1,3 +1,4 @@
+import { ListDetailPage } from './../pages/list-detail/list-detail';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -35,7 +36,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     declarations: [
         MyApp,
         HomePage,
-        ScanPage
+        ScanPage,
+        ListDetailPage
     ],
     imports: [
         BrowserModule,
@@ -52,6 +54,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
         MyApp,
         HomePage,
         ScanPage,
+        ListDetailPage
     ],
     providers: [
         StatusBar,
