@@ -1,7 +1,8 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>login</ion-title>
+    <ion-navbar color="balanced">
+        <ion-title>Login - ล็อกอิน</ion-title>
     </ion-navbar>
+
 </ion-header>
 <ion-content padding>
     <ion-list>
@@ -14,10 +15,10 @@
             <ion-input type="password" [(ngModel)] = "credentials.password"></ion-input>
         </ion-item>
         <ion-item text-center>
-            <button ion-button round style="min-width: 200px; padding: 10px 16px" (click) = "login()" >Login</button>
+            <button ion-button round style="min-width: 180px; padding: 18px 18px" (click) = "login()" >Login</button>
         </ion-item>
         <ion-item text-center>
-            <p tappable (click) = "register()"> Dont't have account? Register </p>
+            <p tappable (click) = "register()"> Dont't have account? Register <br> คุณมีบัญชีแล้วหรือยัง ? สมัครสมาชิก</p>
         </ion-item>
     </ion-list>
 </ion-content>

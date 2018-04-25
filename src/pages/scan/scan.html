@@ -1,5 +1,8 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="balanced">
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
     <ion-title>
       QR Code App
     </ion-title>
@@ -19,7 +22,7 @@
   <ion-card *ngIf="createdCode">
     <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
     <ion-card-content>
-      <p>Value: {{ createdCode }}</p>
+      <p>ชื่อ: {{ createdCode }}</p>
     </ion-card-content>
   </ion-card>
 

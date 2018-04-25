@@ -44,10 +44,6 @@ export class ListDetailPage {
           }
         },
         {
-          text: "Share",
-          icon: "share"
-        },
-        {
           text: "Cancel",
           role: "destructive"
         }

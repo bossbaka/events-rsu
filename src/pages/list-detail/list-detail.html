@@ -6,27 +6,39 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>list-detail</ion-title>
+  <ion-navbar color="balanced">
+    <ion-title>รายละเอียด</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 
-<ion-content padding>
-  <ion-card *ngIf="detail">
-    <img [src]="detail.photo" />
-    <ion-card-content>
-      <ion-card-title>
-        {{detail.name}}
-      </ion-card-title>
-      <p>
+<ion-content padding *ngIf="detail">
 
-      </p>
-      <ion-item>
-        <button ion-button item-left (click)="share(detail)">Share</button>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+
+  <img [src]="detail.photo">
+
+
+
+  <h1>{{detail.name}} </h1>
+  <h5>
+    วัน : {{detail.date}}
+    <br> เวลา : {{detail.time}}
+    <br> สถานที่ : {{detail.place}}
+
+  </h5>
+
+
+
+
+
+
+
+
+  <p>
+    <button ion-button item-left (click)="share(detail)">Share</button>
+  </p>
+
+
 </ion-content>

@@ -1,14 +1,15 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="balanced">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>หน้าแรก</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+  <h1>Event - อีเว้นท์</h1>
   <ion-list *ngIf="items">
     <ion-item *ngFor="let item of items | async" (click)="select(item)">
       <ion-card>
